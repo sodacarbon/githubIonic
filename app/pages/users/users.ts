@@ -28,6 +28,12 @@ export class UsersPage {
     githubUsers
       .load()
       .then(users => this.users = users);
+
+    // Test if our search function works.
+    // quit/ionic serv > Successfully returns array[30] *soda*
+    githubUsers
+      .searchUsers('soda')
+      .then(users => console.log(users));
   }
 
   // We then add a method that will handle the navigation, goToDetails. It takes in two arguments, the event, just in case we want to do something with the event that triggered the navigation, and the login(username).
@@ -37,4 +43,6 @@ export class UsersPage {
   goToDetails(event, login) {
     this.nav.push(UserDetailsPage, { login: login});
   }
+
+
 }

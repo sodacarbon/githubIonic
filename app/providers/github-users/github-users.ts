@@ -58,5 +58,21 @@ export class GithubUsers {
   // Notice that we used the GithubUsers twice in our app. Angular 2 is designed to have singleton existence of providers.
   // We can refactor this by declaring GithubUsers provider in our root component/page which is app/app.ts as a provider,
   // and then deleting the providers: [GithubUsers] property in all other components.
+
+  // Search for github users
+  searchUsers(searchParam: string) {
+    // get the data from the api and return it as a promise
+    return new Promise<Array<User>>(resolve => {
+      // Change the url to match https://api.github.com/search/users?q={searchParam}
+      this.http.get(`https://api.github.com/search/users?q=${searchParam}`)
+      // Cast the result into an array of users.
+      // The returned json result has an items
+      // property which contains the users
+        .map(res => <Array<User>>(res.json().items))
+        .subscribe(users => {
+          resolve(users);
+        });
+    });
+  }
 }
 

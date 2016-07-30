@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+// Import the user model
+import {User} from '../../models/user'
+// import {User} from 'app/models/user';
+
 /*
   Generated class for the GithubUsers provider.
 
@@ -10,30 +14,30 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class GithubUsers {
-  data: any;
+  githubUsers: any;
 
   constructor(private http: Http) {
-    this.data = null;
+    this.githubUsers = null;
   }
 
   load() {
-    if (this.data) {
-      // already loaded data
-      return Promise.resolve(this.data);
+    if (this.githubUsers) {
+      // already loaded users
+      return Promise.resolve(this.githubUsers);
     }
 
-    // don't have the data yet
+    // don't have the users yet
     return new Promise(resolve => {
-      // We're using Angular Http provider to request the data,
+      // We're using Angular Http provider to request the users,
       // then on the response it'll map the JSON data to a parsed JS object.
-      // Next we process the data and resolve the promise with the new data.
-      this.http.get('path/to/data.json')
-        .map(res => res.json())
-        .subscribe(data => {
-          // we've got back the raw data, now generate the core schedule data
-          // and save the data for later reference
-          this.data = data;
-          resolve(this.data);
+      // Next we process the users and resolve the promise with the new data.
+      this.http.get('https://api.github.com/users')
+        .map(res => <Array<User>(res.json()))
+        .subscribe(users => {
+          // we've got back the raw users, now generate the core schedule users
+          // and save the users for later reference
+          this.githubUsers = users;
+          resolve(this.githubUsers);
         });
     });
   }

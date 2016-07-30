@@ -32,7 +32,7 @@ export class GithubUsers {
       // then on the response it'll map the JSON data to a parsed JS object.
       // Next we process the users and resolve the promise with the new data.
       this.http.get('https://api.github.com/users')
-        .map(res => <Array<User>(res.json()))
+        .map(res => <Array<User>>(res.json()))
         .subscribe(users => {
           // we've got back the raw users, now generate the core schedule users
           // and save the users for later reference

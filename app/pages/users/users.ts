@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+// Import GithubUsers provider
+import {GithubUsers} from '../../providers/github-users/github-users';
 /*
   Generated class for the UsersPage page.
 
@@ -9,11 +11,19 @@ import { NavController } from 'ionic-angular';
 */
 @Component({
   templateUrl: 'build/pages/users/users.html',
+
+  // Add the GithubUsers provider as part of our page component
+  providers: [GithubUsers]
 })
 export class UsersPage {
-
-  constructor(private nav: NavController) {
-
+  // Inject the GithubUsers in the constructor of our page component
+  constructor(public nav: NavController, githubUsers: GithubUsers) {
+    // Test whether the github provider returns data
+    githubUsers
+      .load()
+      .then(function (users) {
+        // Log the returned github users
+        console.log(users);
+      });
   }
-
 }

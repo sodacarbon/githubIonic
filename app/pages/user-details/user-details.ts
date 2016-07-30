@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+// Add NavParams to get the navigation parameters
+import { NavController, NavParams } from 'ionic-angular';
 
 /*
   Generated class for the UserDetailsPage page.
@@ -11,9 +12,9 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'build/pages/user-details/user-details.html',
 })
 export class UserDetailsPage {
+  login: string;
 
-  constructor(private nav: NavController) {
-
+  constructor(public nav: NavController, navParams: NavParams) {
+    this.login = navParams.get('login');
   }
-
 }

@@ -54,5 +54,9 @@ export class GithubUsers {
       });
     });
   }
+  // GITHUBUSERS PROVIDER
+  // Notice that we used the GithubUsers twice in our app. Angular 2 is designed to have singleton existence of providers.
+  // We can refactor this by declaring GithubUsers provider in our root component/page which is app/app.ts as a provider,
+  // and then deleting the providers: [GithubUsers] property in all other components.
 }
 
